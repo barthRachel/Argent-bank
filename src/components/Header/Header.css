@@ -24,6 +24,15 @@ nav a {
     width: 200px;
 }
 
+.signout-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.nav-login {
+    margin-right: 0.5rem;
+}
+
 .nav-login:hover {
     text-decoration: underline;
 }

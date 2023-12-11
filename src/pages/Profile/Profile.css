@@ -1,0 +1,64 @@
+.header-profile {
+    color: white;
+    margin-bottom: 2rem;
+}
+
+.header-profile h1 {
+    font-size: 32px;
+}
+
+.header-profile.editMode {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.edit-button {
+    border: #00bc77;
+    background-color: #00bc77;
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+}
+
+.edit-button.cancel {
+    border: red;
+    background-color: red;
+}
+
+.edit-button:hover {
+    cursor: pointer;
+}
+
+.editMode-container {
+    display: flex;
+}
+
+.editMode-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.editMode-wrapper:nth-child(1) {
+    align-items: end;
+    margin-right: 7.5px;
+}
+
+.editMode-wrapper:nth-child(2) {
+    align-items: start;
+    margin-left: 7.5px;
+}
+
+.editMode-wrapper input {
+    padding: 5px;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    width: 80%;
+}
+
+@media (min-width:720px) {
+    .editMode-wrapper input {
+        width: 100%;
+    }
+}
+

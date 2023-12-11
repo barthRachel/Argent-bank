@@ -1,8 +1,54 @@
 import './Login.css';
+import { FaCircleUser } from "react-icons/fa6";
+
+import { useForm } from 'react-hook-form'
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux'
+import { userLogin } from '../../features/auth/authActions'
 
 function Login() {
+    const { loading, userInfo, error } = useSelector((state) => state.auth)
+    const dispatch = useDispatch()
+    const { register, handleSubmit } = useForm()
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if (userInfo) {
+          navigate('/profile')
+          console.log(userInfo)
+        }
+    }, [navigate, userInfo])
+  
+    const submitForm = (data) => {
+        console.log(data)
+        console.log(dispatch(userLogin(data)))
+        dispatch(userLogin(data))
+    }
+
+
     return(
-        <h1>Login</h1>
+        <main className='mainLogin main-bg'>
+            <section>
+                <FaCircleUser />
+                <h1>Sign In</h1>
+                <form onSubmit={handleSubmit(submitForm)}>
+                    <div className='input-wrapper'>
+                        <label htmlFor='username'>Username</label>
+                        <input type="email" id='username' required {...register("email")}/>
+                    </div>
+                    <div className='input-wrapper'>
+                        <label htmlFor='password'>Password</label>
+                        <input type='password' id='password' required {...register("password")}/>
+                    </div>
+                    <div className='remember-wrapper'>
+                        <input type='checkbox' id='remember-me' />
+                        <label htmlFor='remember-me'>Remember me</label>
+                    </div>
+                    <button className='sign-in-button green-button'>Sign In</button>
+                </form>
+            </section>
+        </main>
     )
 }
 
