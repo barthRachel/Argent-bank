@@ -35,3 +35,8 @@
 .remember-wrapper label {
     margin-left: 0.25rem;
 }
+
+.error-message {
+    color: #e54858;
+    font-size: 14px;
+}

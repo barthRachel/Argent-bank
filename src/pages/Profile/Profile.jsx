@@ -2,6 +2,10 @@ import './Profile.css';
 import BalanceBloc from '../../components/BalanceBloc/BalanceBloc';
 
 
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux'
+import { userGetProfile } from '../../features/auth/authActions'
+
 function Profile() {
     const balance_info = [
         {
@@ -17,6 +21,16 @@ function Profile() {
             amount: "184.30"
         }
     ]
+
+/*     const { loading, userInfo, error } = useSelector((state) => state.auth)
+    const dispatch = useDispatch();
+
+
+    useEffect(() => {
+        const token = localStorage.getItem('userToken')
+        console.log(token)
+        dispatch(userGetProfile(token))
+    }) */
 
     return(
         <main className='main-bg'>

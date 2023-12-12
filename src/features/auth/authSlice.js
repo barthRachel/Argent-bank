@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { userLogin } from './authActions';
+import { userLogin, userGetProfile } from './authActions';
 
 // initialize userToken from local storage
 const userToken = localStorage.getItem('userToken')
@@ -38,7 +38,19 @@ const authSlice = createSlice({
       state.loading = false
       state.error = payload
     },
-    // register user reducer...
+
+    [userGetProfile.pending]: (state) => {
+      state.loading = true
+      state.error = null
+    },
+    [userGetProfile.fulfilled]: (state, { payload }) => {
+      state.loading = false
+      state.userInfo = payload 
+    },
+    [userGetProfile.rejected]: (state, { payload }) => {
+      state.loading = false
+      state.error = payload
+    },
   },
 })
 export default authSlice.reducer

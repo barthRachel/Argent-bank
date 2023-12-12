@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
 import { userLogin } from '../../features/auth/authActions'
-
+//userInfo = reponse requete api
 function Login() {
     const { loading, userInfo, error } = useSelector((state) => state.auth)
     const dispatch = useDispatch()
@@ -15,17 +15,17 @@ function Login() {
 
     useEffect(() => {
         if (userInfo) {
-          navigate('/profile')
-          console.log(userInfo)
+            console.log(userInfo)
+            navigate('/profile')
         }
     }, [navigate, userInfo])
   
     const submitForm = (data) => {
         console.log(data)
+        console.log(userInfo)
         console.log(dispatch(userLogin(data)))
         dispatch(userLogin(data))
     }
-
 
     return(
         <main className='mainLogin main-bg'>
@@ -44,6 +44,13 @@ function Login() {
                     <div className='remember-wrapper'>
                         <input type='checkbox' id='remember-me' />
                         <label htmlFor='remember-me'>Remember me</label>
+                    </div>
+                    <div className='error-message'>
+                        {
+                            error && (
+                                <p>{error}</p>
+                            )
+                        }
                     </div>
                     <button className='sign-in-button green-button'>Sign In</button>
                 </form>
