@@ -18,7 +18,8 @@ function Login() {
             console.log(userInfo)
             navigate('/profile')
         }
-    }, [navigate, userInfo])
+        console.log(loading)
+    }, [navigate, userInfo, loading])
   
     const submitForm = (data) => {
         console.log(data)
@@ -44,6 +45,13 @@ function Login() {
                     <div className='remember-wrapper'>
                         <input type='checkbox' id='remember-me' />
                         <label htmlFor='remember-me'>Remember me</label>
+                    </div>
+                    <div className='loading'>
+                        {
+                            loading && (
+                                <p className="loader"></p>
+                            )
+                        }
                     </div>
                     <div className='error-message'>
                         {
