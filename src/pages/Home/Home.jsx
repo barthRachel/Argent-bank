@@ -3,11 +3,9 @@ import './Home.css';
 import chat from '../../assets/icon-chat.png';
 import money from '../../assets/icon-money.png';
 import security from '../../assets/icon-security.png';
-
 import FeatureItem from '../../components/FeatureItem/FeatureItem';
 
 function Home() {
-
     const features = [
         {
             icon: chat,

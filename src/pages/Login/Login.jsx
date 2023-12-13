@@ -15,11 +15,9 @@ function Login() {
 
     useEffect(() => {
         if (userInfo) {
-            console.log(userInfo)
             navigate('/profile')
         }
-        console.log(loading)
-    }, [navigate, userInfo, loading])
+    }, [navigate, userInfo])
   
     const submitForm = (data) => {
         console.log(data)

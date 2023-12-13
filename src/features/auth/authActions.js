@@ -34,36 +34,3 @@ export const userLogin = createAsyncThunk(
     }
   }
 )
-
-export const userGetProfile = createAsyncThunk(
-  'auth/getProfile',
-  async (userToken, { rejectWithValue }) => {
-    try {
-      // configure header's Content-Type as JSON
-      const config = {
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${userToken}`,
-        },
-      }
-      const userProfile = await axios.post(
-        `${baseURL}/user/profile`,
-        config
-      )
-      console.log("ouais")
-      return userProfile
-    } catch (error) {
-      // return custom error message from API if any
-      console.log("error")
-      console.log(error)
-      if (error.response && error.response.data.message) {
-
-        console.log("error1")
-        return rejectWithValue(error.response.data.message)
-      } else {
-        console.log("error2")
-        return rejectWithValue(error.message)
-      }
-    }
-  }
-)

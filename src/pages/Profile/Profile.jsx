@@ -1,10 +1,10 @@
 import './Profile.css';
 import BalanceBloc from '../../components/BalanceBloc/BalanceBloc';
 
-
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { userGetProfile } from '../../features/auth/authActions'
+import { userGetProfile } from '../../features/user/userActions'
+import { editProfile } from '../../features/edit/editActions';
 
 function Profile() {
     const balance_info = [
@@ -22,33 +22,68 @@ function Profile() {
         }
     ]
 
-/*     const { loading, userInfo, error } = useSelector((state) => state.auth)
+    const { loading, user, error } = useSelector((state) => state.user)
     const dispatch = useDispatch();
-
+    const { userEdition } = useSelector((state) => state.edit)
+/*     console.log(useSelector((state) => state.edit))
+    console.log(useSelector((state) => state.auth)) */
+    const token = localStorage.getItem('userToken')
 
     useEffect(() => {
-        const token = localStorage.getItem('userToken')
-        console.log(token)
-        dispatch(userGetProfile(token))
-    }) */
+        if(user == null) {
+            dispatch(userGetProfile(token))
+        }
+    }, [user, dispatch, token])
+
+    const editMode = () => {
+        document.querySelector('.editMode').classList.toggle('hidden');
+        document.querySelector('.normalMode').classList.toggle('hidden');
+
+        document.querySelector('#firstName').value = "";
+        document.querySelector('#lastName').value = "";
+    }
+
+    const saveChange = () => {
+        const firstnameValue = document.querySelector('#firstName').value;
+        const lastnameValue = document.querySelector('#lastName').value;
+
+        let isFirstnameSet, isLastnameSet;
+
+        firstnameValue === "" ? isFirstnameSet = false : isFirstnameSet = true;
+        lastnameValue === "" ? isLastnameSet = false : isLastnameSet = true;
+
+        if(isFirstnameSet && isLastnameSet) {
+            const userEdit = {
+                token: token,
+                firstName : firstnameValue,
+                lastName : lastnameValue
+            }
+            dispatch(editProfile(userEdit))
+            editMode()
+        }
+    }
 
     return(
         <main className='main-bg'>
-            <section className='header-profile'>
-                <h1>Welcome back<br/><span className='userName'>Tony Jarvis</span>!</h1>
-                <button className='edit-button'>Edit Name</button>
+            <section className='header-profile normalMode'>
+                {
+                    (user != null) && (
+                        <h1>Welcome back<br/><span className='userName'>{user.firstName} {user.lastName}</span>!</h1>
+                    )
+                }
+                <button className='edit-button' onClick={editMode}>Edit Name</button>
             </section>
 
             <section className='header-profile editMode hidden'>
                 <h1>Welcome back</h1>
                 <div className='editMode-container'>
                     <div className='editMode-wrapper'>
-                        <input type='text' id='firstName' placeholder='Tony' />
-                        <button className='edit-button save'>Save</button>
+                        <input type='text' id='firstName' placeholder={user ? user.firstName : ""} />
+                        <button className='edit-button save' onClick={saveChange}>Save</button>
                     </div>
                     <div className='editMode-wrapper'>
-                        <input type='text' id='lastName' placeholder='Jarvis' />
-                        <button className='edit-button cancel'>Cancel</button>
+                        <input type='text' id='lastName' placeholder={user ? user.lastName : ""} />
+                        <button className='edit-button cancel' onClick={editMode}>Cancel</button>
                     </div>
                 </div>
             </section>

@@ -5,16 +5,27 @@ import { Link } from 'react-router-dom';
 import { FaCircleUser } from "react-icons/fa6";
 import { FaSignOutAlt } from "react-icons/fa";
 
-
-import { useSelector } from 'react-redux'
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux'
+import { userGetProfile } from '../../features/user/userActions'
 
 function Header() {
-    const isLogged = useSelector((state) => state.auth).logged
+    const isLogged = useSelector((state) => state.auth).logged;
+    const { loading, user, error } = useSelector((state) => state.user)
+    const dispatch = useDispatch();
 
     const UserLogout = () => {
         localStorage.clear()
         useSelector((state) => state.auth)
     }
+
+    const token = localStorage.getItem('userToken')
+
+    useEffect(() => {
+        if(user == null) {
+            dispatch(userGetProfile(token))
+        }
+    }, [user, dispatch, token])
     
     return(
         <nav>
@@ -33,7 +44,11 @@ function Header() {
             { isLogged && (
                 <div className='signout-container'>
                     <Link className='nav-login' to={"/profile"}>
-                        <FaCircleUser /> <span className='header-user-name'>Tony</span>
+                        {
+                            (user != null) && (
+                                <span><FaCircleUser /> <span className='header-user-name'>{user.firstName}</span></span>
+                            )
+                        } 
                     </Link>
                     <Link className='nav-login' to={"/"} onClick={UserLogout}>
                         <FaSignOutAlt /> Sign Out
