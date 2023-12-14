@@ -22,11 +22,9 @@ function Profile() {
         }
     ]
 
-    const { loading, user, error } = useSelector((state) => state.user)
+    const { user } = useSelector((state) => state.user)
     const dispatch = useDispatch();
-    const { userEdition } = useSelector((state) => state.edit)
-/*     console.log(useSelector((state) => state.edit))
-    console.log(useSelector((state) => state.auth)) */
+    
     const token = localStorage.getItem('userToken')
 
     useEffect(() => {

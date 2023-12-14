@@ -11,7 +11,7 @@ import { userGetProfile } from '../../features/user/userActions'
 
 function Header() {
     const isLogged = useSelector((state) => state.auth).logged;
-    const { loading, user, error } = useSelector((state) => state.user)
+    const { user } = useSelector((state) => state.user)
     const dispatch = useDispatch();
 
     const UserLogout = () => {
