@@ -1,7 +1,6 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-
-const baseURL = 'http://localhost:3001/api/v1'
+import constants from "../../utils/contants";
 
 export const userGetProfile = createAsyncThunk(
     'user/profile',
@@ -14,7 +13,7 @@ export const userGetProfile = createAsyncThunk(
           },
         }
         const userProfile = await axios.post(
-          `${baseURL}/user/profile`,
+          `${constants.URL}/profile`,
           userToken,
           config
         )

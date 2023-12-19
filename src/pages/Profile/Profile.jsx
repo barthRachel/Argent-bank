@@ -2,6 +2,7 @@ import './Profile.css';
 import BalanceBloc from '../../components/BalanceBloc/BalanceBloc';
 
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
 import { userGetProfile } from '../../features/user/userActions'
 import { editProfile } from '../../features/edit/editActions';
@@ -24,14 +25,18 @@ function Profile() {
 
     const { user } = useSelector((state) => state.user)
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     
     const token = localStorage.getItem('userToken')
 
     useEffect(() => {
+        if(token === "" || token === null) {
+            navigate("/")
+        }
         if(user == null) {
             dispatch(userGetProfile(token))
         }
-    }, [user, dispatch, token])
+    }, [user, dispatch, token, navigate])
 
     const editMode = () => {
         document.querySelector('.editMode').classList.toggle('hidden');

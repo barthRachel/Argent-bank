@@ -1,7 +1,6 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-
-const baseURL = 'http://localhost:3001/api/v1'
+import constants from "../../utils/contants"; 
 
 export const userLogin = createAsyncThunk(
   'auth/login',
@@ -14,7 +13,7 @@ export const userLogin = createAsyncThunk(
         },
       }
       const userTok = await axios.post(
-        `${baseURL}/user/login`,
+        `${constants.URL}/login`,
         userLogin,
         config
       )
