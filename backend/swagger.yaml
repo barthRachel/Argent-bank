@@ -112,7 +112,7 @@ paths:
           description: Invalid Fields
         '500':
           description: Internal Server Error
-  /user/transactions:
+  /user/{user_id}/transactions:
     post:
       security:
        - Bearer: []
@@ -123,6 +123,11 @@ paths:
       description:
         API for fetching user transactions
       parameters:
+        - in: path
+          name: user_id
+          description: User id
+          required: true
+          type: string
         - in: header
           name: Authorization
           description: Attach Bearer JWT token
@@ -139,7 +144,7 @@ paths:
           description: Invalid Fields
         "500":
           description: Internal Server Error
-  /user/transaction:
+  /user/{user_id}/transactions/{transaction_id}:
     post:
       security:
         - Bearer : []
@@ -150,6 +155,16 @@ paths:
       description:
         API for fecthing user transaction details
       parameters:
+        - in: path
+          name: user_id
+          description: User identification
+          required: true
+          type: string
+        - in: path
+          name: transaction_id
+          description: Transaction identification
+          required: true
+          type: string
         - in: header
           name: Authorization
           description: Attach Bearer JWT token
@@ -182,6 +197,16 @@ paths:
       summary: User transactions API
       description: API for updating a user transaction details
       parameters:
+        - in: path
+          name: user_id
+          description: User identification
+          required: true
+          type: string
+        - in: path
+          name: transaction_id
+          description: Transaction identification
+          required: true
+          type: string
         - in: header
           name: Authorization
           description: Attach Bearer JWT token
