@@ -1,3 +1,7 @@
+.main-profile {
+    flex: 1;
+}
+
 .header-profile {
     color: white;
     margin-bottom: 2rem;

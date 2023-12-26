@@ -67,7 +67,7 @@ function Profile() {
     }
 
     return(
-        <main className='main-bg'>
+        <main className='main-bg main-profile'>
             <section className='header-profile normalMode'>
                 {
                     (user != null) && (
