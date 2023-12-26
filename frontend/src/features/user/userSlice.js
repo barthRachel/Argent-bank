@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { userGetProfile } from "./userActions";
+import { editProfile } from "./userActions";
 
 const initialState = {
   loading: false,
@@ -24,6 +25,19 @@ const userSlice = createSlice({
     [userGetProfile.rejected]: (state, { payload }) => {
       state.loading = false
       state.error = payload
+    },
+
+    [editProfile.pending]: (state) => {
+      state.loading = true
+      state.error = null
+    },
+    [editProfile.fulfilled]: (state, { payload }) => {
+        state.loading = false
+        state.user = payload
+    },
+    [editProfile.rejected]: (state, { payload }) => {
+        state.loading = false
+        state.error = payload
     },
   }
 })

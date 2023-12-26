@@ -3,9 +3,8 @@ import BalanceBloc from '../../components/BalanceBloc/BalanceBloc';
 
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux'
-import { userGetProfile } from '../../features/user/userActions'
-import { editProfile } from '../../features/edit/editActions';
+import { useDispatch, useSelector } from 'react-redux';
+import { userGetProfile, editProfile } from '../../features/user/userActions';
 
 function Profile() {
     const balance_info = [
