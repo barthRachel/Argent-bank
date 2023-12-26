@@ -418,8 +418,6 @@ definitions:
   UserTransactionUpdate:
     type: object
     properties:
-      id:
-        type: string
       category:
         type: string
       notes:
