@@ -23,9 +23,7 @@ export const userLogin = createAsyncThunk(
       return userTok
     } catch (error) {
       // return custom error message from API if any
-      console.log("error")
       if (error.response && error.response.data.message) {
-        console.log(error.response.request.status)
         return rejectWithValue(error.response.data.message)
       } else {
         return rejectWithValue(error.message)

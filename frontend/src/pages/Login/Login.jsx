@@ -20,9 +20,6 @@ function Login() {
     }, [navigate, userInfo])
   
     const submitForm = (data) => {
-        console.log(data)
-        console.log(userInfo)
-        console.log(dispatch(userLogin(data)))
         dispatch(userLogin(data))
     }
 
